@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:safegrandpa/models/user.dart';
+import 'package:safegrandpa/models/userInitial.dart';
 import 'package:safegrandpa/services/databaseService.dart';
 
 class Authservice {

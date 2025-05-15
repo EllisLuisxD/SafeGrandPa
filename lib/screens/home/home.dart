@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:safegrandpa/models/user.dart';
+import 'package:safegrandpa/models/userInitial.dart';
 import 'package:safegrandpa/models/userData.dart';
 import 'package:safegrandpa/services/authService.dart';
 import 'package:safegrandpa/services/databaseService.dart';

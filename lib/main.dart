@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:safegrandpa/models/user.dart';
+import 'package:safegrandpa/models/userInitial.dart';
 import 'package:safegrandpa/screens/auth/wrapper.dart';
 import 'package:safegrandpa/screens/home/family_home.dart';
 import 'package:safegrandpa/screens/home/granpa_home.dart';

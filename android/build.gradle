@@ -1,13 +1,14 @@
+
 buildscript {
-        repositories {
+    repositories {
         google()
         mavenCentral()
-        gradlePluginPortal() // <-- Asegura que esto esté presente
+        gradlePluginPortal()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.3.0' // Versión actualizada
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0' // Asegurar compatibilidad con Kotlin
+        classpath 'com.android.tools.build:gradle:8.6.0'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0'
         classpath 'com.google.gms:google-services:4.4.2'
     }
 }

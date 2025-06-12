@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
           ],
         ),
         body: StreamBuilder<UserData>(
-          stream: DatabaseService(uid: user.uid).userData,
+          stream: DatabaseService(uid: user.uid).userDataStream,
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.data == null) {
               return Center(child: Text("Cargando datos..."));

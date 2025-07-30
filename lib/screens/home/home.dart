@@ -37,8 +37,8 @@ class _HomeState extends State<Home> {
             ),
           ],
         ),
-        body: StreamBuilder<UserData>(
-          stream: DatabaseService(uid: user.uid).userDataStream,
+        body: StreamBuilder<UserData?>(
+          stream: DatabaseService(uid: user.uid).userData,
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.data == null) {
               return Center(child: Text("Cargando datos..."));
@@ -50,9 +50,9 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   Text('Email: ${userData!.email}'),
-                  Text('Nombre: ${userData.nombre}'),
+                  Text('Nombre: ${userData.name}'),
                   Text('UserType: ${userData.userType}'),
-                  Text('Phone: ${userData.phone}'),
+                  Text('Phone: ${userData.phoneNumber}'),
                 ],
               ),
             );

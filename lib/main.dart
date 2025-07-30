@@ -2,11 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:safegrandpa/models/userData.dart';
-import 'package:safegrandpa/models/userInitial.dart'; // Tu modelo UserInitial
 import 'package:safegrandpa/screens/auth/wrapper.dart';
 import 'package:safegrandpa/screens/home/family_home.dart';
 import 'package:safegrandpa/screens/home/granpa_home.dart';
-import 'package:safegrandpa/services/authService.dart'; // Tu AuthService
+import 'package:safegrandpa/services/authService.dart'; // AuthService
 import 'package:safegrandpa/services/databaseService.dart';
 
 void main() async {

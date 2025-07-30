@@ -18,7 +18,7 @@ class EmergencyAlert {
     required this.latitude,
     required this.longitude,
     required this.timestamp,
-    this.status = 'pending',
+    required this.status,
   });
 
   // Constructor para crear un objeto EmergencyAlert desde un DocumentSnapshot de Firestore

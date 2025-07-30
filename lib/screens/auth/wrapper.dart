@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:safegrandpa/models/userInitial.dart'; // Tu modelo UserInitial (para autenticación)
 import 'package:safegrandpa/models/userData.dart'; // Tu modelo UserData (para datos de Firestore)
 import 'package:safegrandpa/screens/auth/authenticate.dart'; // Tu pantalla de login/registro
 import 'package:safegrandpa/screens/home/family_home.dart'; // Tu pantalla para familiares
@@ -26,7 +25,7 @@ class Wrapper extends StatelessWidget {
       return StreamBuilder<UserData?>(
         // Define el tipo como UserData? (nullable)
         // Crea una instancia de DatabaseService SOLO cuando userInitial.uid no es null
-        stream: DatabaseService(uid: userInitial.uid).userDataStream,
+        stream: DatabaseService(uid: userInitial.uid).userData,
         builder: (context, snapshot) {
           // Si está esperando los datos del usuario de Firestore
           if (snapshot.connectionState == ConnectionState.waiting) {

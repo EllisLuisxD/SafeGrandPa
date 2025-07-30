@@ -1,6 +1,8 @@
+// lib/screens/auth/login_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:safegrandpa/services/authService.dart';
-import 'package:safegrandpa/widgets/loading.dart';
+import 'package:safegrandpa/widgets/loading.dart'; // Asegúrate de que este widget de carga sea visible y funcional
 
 class LoginScreen extends StatefulWidget {
   final Function toggleView;
@@ -23,124 +25,197 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     emailController.dispose();
     passwordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return loading
-        ? Loading()
+        ? const Loading() // Asegúrate de que Loading() sea un widget const si es posible
         : Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'Iniciar Sesión SGP',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 21),
+            // Fondo con gradiente suave
+            body: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Color(0xFF8E2DE2), // Un violeta profundo
+                    Color(0xFF4A00E0), // Un azul-violeta oscuro
+                  ],
+                ),
               ),
-              foregroundColor: Colors.lightBlue,
-              backgroundColor: Colors.amber,
-              actions: [
-                TextButton.icon(
-                  onPressed: () {
-                    //usamos widget porque estamos trabajando dentro de un StateFul
-                    widget.toggleView();
-                  },
-                  label: Text('Register'),
-                  icon: Icon(Icons.person),
-                  style: ButtonStyle(
-                      foregroundColor: WidgetStatePropertyAll(Colors.white)),
-                )
-              ],
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Form(
-                      key: _key,
-                      child: Center(
+              child: Center(
+                child: SingleChildScrollView(
+                  // Permite desplazamiento si el teclado cubre los campos
+                  padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Logo o Icono de la App
+                      const Icon(
+                        Icons.shield_outlined, // Un icono que sugiere seguridad
+                        size: 100,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(height: 20),
+                      // Título
+                      const Text(
+                        'Bienvenido a SafeGrandpa',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Inter', // Usando una fuente moderna
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Inicia sesión para proteger a tus seres queridos.',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 16,
+                          fontFamily: 'Inter',
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 40),
+
+                      Form(
+                        key: _key,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.70,
-                                child: TextFormField(
-                                  controller: emailController,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Ingresa tu correo';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Email'),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      emailController.text = value;
-                                    });
-                                  },
-                                )),
-                            SizedBox(
-                              height: 15,
+                            // Campo de Email
+                            TextFormField(
+                              controller: emailController,
+                              validator: (value) =>
+                                  value!.isEmpty ? 'Ingresa tu correo' : null,
+                              decoration: InputDecoration(
+                                hintText: 'Correo Electrónico',
+                                fillColor: Colors.white.withOpacity(0.9),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  borderSide: BorderSide.none,
+                                ),
+                                prefixIcon: const Icon(Icons.email,
+                                    color: Color(0xFF4A00E0)),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15.0, horizontal: 20.0),
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                              style: const TextStyle(color: Colors.black87),
                             ),
-                            SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.70,
-                                child: TextFormField(
-                                  controller: passwordController,
-                                  obscureText: true,
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return 'Ingresa tu contraseña';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      hintText: 'Password'),
-                                  onChanged: (value) {
+                            const SizedBox(height: 20),
+                            // Campo de Contraseña
+                            TextFormField(
+                              controller: passwordController,
+                              obscureText: true,
+                              validator: (value) => value!.isEmpty
+                                  ? 'Ingresa tu contraseña'
+                                  : null,
+                              decoration: InputDecoration(
+                                hintText: 'Contraseña',
+                                fillColor: Colors.white.withOpacity(0.9),
+                                filled: true,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  borderSide: BorderSide.none,
+                                ),
+                                prefixIcon: const Icon(Icons.lock,
+                                    color: Color(0xFF4A00E0)),
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 15.0, horizontal: 20.0),
+                              ),
+                              style: const TextStyle(color: Colors.black87),
+                            ),
+                            const SizedBox(height: 30),
+
+                            // Botón de Iniciar Sesión
+                            ElevatedButton(
+                              onPressed: () async {
+                                if (_key.currentState!.validate()) {
+                                  setState(() {
+                                    loading = true;
+                                    error = ''; // Limpiar errores anteriores
+                                  });
+
+                                  dynamic result =
+                                      await _auth.signInWithEmailAndPassword(
+                                    emailController.text,
+                                    passwordController.text,
+                                  );
+
+                                  if (result == null) {
                                     setState(() {
-                                      passwordController.text = value;
+                                      error =
+                                          'Credenciales incorrectas o usuario no encontrado.';
+                                      loading = false;
                                     });
-                                  },
-                                )),
-                            ElevatedButton.icon(
-                                onPressed: () async {
-                                  if (_key.currentState!.validate()) {
-                                    setState(() {
-                                      loading = true;
-                                    });
-
-                                    dynamic result =
-                                        await _auth.signInWithEmailAndPassword(
-                                            emailController.text,
-                                            passwordController.text);
-
-                                    if (result == null) {
-                                      setState(() {
-                                        error =
-                                            'No se pudo encontrar los datos';
-                                        loading = false;
-                                      });
-                                    }
-
-                                    emailController.clear();
-                                    passwordController.clear();
-
-                                    print("Uid: ${result.uid}");
                                   }
-                                },
-                                label: Text('Iniciar Sesión'))
+                                  // No limpiar controladores aquí si el inicio de sesión es exitoso,
+                                  // ya que el widget se desmontará y se navegará a otra pantalla.
+                                  // Si falla, los usuarios podrían querer corregir su entrada.
+                                }
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(
+                                    0xFFFFA000), // Un naranja vibrante
+                                foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 15),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                elevation: 5,
+                                minimumSize: const Size(
+                                    double.infinity, 50), // Ancho completo
+                              ),
+                              child: const Text(
+                                'INICIAR SESIÓN',
+                                style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Inter'),
+                              ),
+                            ),
                           ],
                         ),
-                      )),
-                  Text(
-                    error,
-                    style: TextStyle(color: Colors.red),
-                  )
-                ],
+                      ),
+                      const SizedBox(height: 20),
+                      // Mensaje de Error
+                      Text(
+                        error,
+                        style: const TextStyle(
+                            color: Colors.redAccent,
+                            fontSize: 14,
+                            fontFamily: 'Inter'),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 20),
+                      // Botón para Registrarse
+                      TextButton(
+                        onPressed: () {
+                          widget
+                              .toggleView(); // Navegar a la pantalla de registro
+                        },
+                        child: const Text(
+                          '¿No tienes cuenta? Regístrate aquí',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontFamily: 'Inter',
+                            decoration: TextDecoration.underline,
+                            decorationColor: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             ),
           );
